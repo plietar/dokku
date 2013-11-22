@@ -7,6 +7,10 @@ export PLUGIN_PATH=${PLUGIN_PATH:="/var/lib/dokku/plugins"}
 
 [[ $DOKKU_TRACE ]] && set -x
 
+if [[ -n $SSH_ORIGINAL_COMMAND ]]; then
+    eval "set $SSH_ORIGINAL_COMMAND"
+fi
+
 export DOKKU_ORIGINAL_COMMAND="$1"
 [[ -z $DOKKU_ORIGINAL_COMMAND ]] && export DOKKU_ORIGINAL_COMMAND="_"
 [[ $# > 0 ]] && shift
